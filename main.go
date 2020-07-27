@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/sirupsen/logrus"
-	"github.com/Altinity/libclick-go"
+	libclick "github.com/Altinity/libclick-go"
 	flag "github.com/jessevdk/go-flags"
 
 	"github.com/honeycombio/honeytail/httime"
@@ -169,13 +169,6 @@ func main() {
 	handleOtherModes(flagParser, options.Modes)
 	addParserDefaultOptions(&options)
 	sanityCheckOptions(&options)
-
-    if err := libclick.VerifyApiHost(libclick.Config{
-		APIHost:  options.APIHost,
-	}); err != nil {
-		fmt.Fprintln(os.Stderr, "Could not connect to ClickHouse server: ", err)
-		os.Exit(1)
-	}
 
 
 	run(options)

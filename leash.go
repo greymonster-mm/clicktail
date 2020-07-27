@@ -17,7 +17,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/honeycombio/dynsampler-go"
-	"github.com/Altinity/libclick-go"
+	libclick "github.com/Altinity/libclick-go"
 	"github.com/honeycombio/urlshaper"
 
 	"github.com/honeycombio/honeytail/event"
@@ -67,7 +67,6 @@ func run(options GlobalOptions) {
 		logrus.WithFields(logrus.Fields{"err": err}).Fatal(
 			"Error occured while spinning up Transimission")
 	}
-
 	// compile the prefix regex once for use on all channels
 	var prefixRegex *parsers.ExtRegexp
 	if options.PrefixRegex == "" {
