@@ -30,8 +30,8 @@ import (
 	"github.com/honeycombio/honeytail/parsers/postgresql"
 	"github.com/honeycombio/honeytail/parsers/regex"
 	"github.com/honeycombio/honeytail/tail"
-	"github.com/Altinity/clicktail/parsers/mysql"
-    "github.com/Altinity/clicktail/parsers/mysqlaudit"
+	"github.com/greymonster-mm/clicktail/parsers/mysql"
+    "github.com/greymonster-mm/clicktail/parsers/mysqlaudit"
 )
 
 // actually go and be leashy
