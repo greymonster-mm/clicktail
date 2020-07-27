@@ -23,7 +23,7 @@ import (
 	"github.com/honeycombio/honeytail/parsers/regex"
 	"github.com/honeycombio/honeytail/tail"
 	"github.com/greymonster-mm/clicktail/parsers/mysql"
-	"github.com/greymonster-mm/parsers/mysqlaudit"
+	"github.com/greymonster-mm/clicktail/parsers/mysqlaudit"
 )
 
 // BuildID is set by Travis CI
