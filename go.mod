@@ -1,4 +1,4 @@
-module github.com/honeycombio/clicktail
+module github.com/greymonster-mm/clicktail
 
 go 1.13
 
