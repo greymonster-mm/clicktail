@@ -15,11 +15,13 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/sirupsen/logrus"
-	"github.com/honeycombio/dynsampler-go"
 	libclick "github.com/Altinity/libclick-go"
+	"github.com/honeycombio/dynsampler-go"
 	"github.com/honeycombio/urlshaper"
+	"github.com/sirupsen/logrus"
 
+	"github.com/greymonster-mm/clicktail/parsers/mysql"
+	"github.com/greymonster-mm/clicktail/parsers/mysqlaudit"
 	"github.com/honeycombio/honeytail/event"
 	"github.com/honeycombio/honeytail/parsers"
 	"github.com/honeycombio/honeytail/parsers/arangodb"
@@ -30,8 +32,6 @@ import (
 	"github.com/honeycombio/honeytail/parsers/postgresql"
 	"github.com/honeycombio/honeytail/parsers/regex"
 	"github.com/honeycombio/honeytail/tail"
-	"github.com/greymonster-mm/clicktail/parsers/mysql"
-    "github.com/greymonster-mm/clicktail/parsers/mysqlaudit"
 )
 
 // actually go and be leashy
@@ -224,9 +224,9 @@ func getParserAndOptions(options GlobalOptions) (parsers.Parser, interface{}) {
 		opts = &options.MySQL
 		opts.(*mysql.Options).NumParsers = int(options.NumSenders)
 	case "mysqlaudit":
-        parser = &mysqlaudit.Parser{}
-        opts = &options.MySQLAudit
-        opts.(*mysqlaudit.Options).NumParsers = int(options.NumSenders)
+		parser = &mysqlaudit.Parser{}
+		opts = &options.MySQLAudit
+		opts.(*mysqlaudit.Options).NumParsers = int(options.NumSenders)
 	case "postgresql":
 		opts = &options.PostgreSQL
 		parser = &postgresql.Parser{}
@@ -507,10 +507,23 @@ func handleResponses(responses chan libclick.Response, stats *responseStats,
 			"timestamp":   rsp.Metadata.(event.Event).Timestamp,
 		}
 		// if this is an error we should retry sending, re-enqueue the event
-		if options.BackOff && (rsp.StatusCode == 429 || rsp.StatusCode == 500) {
+		if rsp.StatusCode == 429 || rsp.StatusCode == 500 || (rsp.Err != nil && rsp.Err.Error() != "EOF") {
+			newEvent := rsp.Metadata.(event.Event)
+			logrus.WithFields(logfields).Debug("retry")
 			logfields["retry_send"] = true
-			delaySending <- 1000 / int(options.NumSenders) // back off for a little bit
-			toBeResent <- rsp.Metadata.(event.Event)       // then retry sending the event
+			times, ok := newEvent.Data["intExtra2"]
+			if ok {
+				times = times.(int) + 1
+			} else {
+				times = 1
+			}
+			logrus.WithFields(logfields).Debug(times)
+			if times.(int) < 3 {
+				newEvent.Data["intExtra2"] = times
+				delaySending <- 5000 * times.(int) //1000 / int(options.NumSenders) // back off for a little bit
+				toBeResent <- newEvent                         // then retry sending the event
+			}
+
 		} else {
 			logfields["retry_send"] = false
 		}

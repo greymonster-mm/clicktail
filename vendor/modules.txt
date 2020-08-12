@@ -1,0 +1,70 @@
+# github.com/Altinity/libclick-go v1.6.1-0.20180401204617-875fa06ddbc7
+github.com/Altinity/libclick-go
+# github.com/davecgh/go-spew v1.1.1
+github.com/davecgh/go-spew/spew
+# github.com/facebookgo/clock v0.0.0-20150410010913-600d898af40a
+github.com/facebookgo/clock
+# github.com/facebookgo/limitgroup v0.0.0-20150612190941-6abd8d71ec01
+github.com/facebookgo/limitgroup
+# github.com/facebookgo/muster v0.0.0-20150708232844-fd3d7953fd52
+github.com/facebookgo/muster
+# github.com/go-sql-driver/mysql v1.5.0
+github.com/go-sql-driver/mysql
+# github.com/honeycombio/dynsampler-go v0.2.1
+github.com/honeycombio/dynsampler-go
+# github.com/honeycombio/gonx v1.3.1-0.20171118020637-f9b2468e9ef8
+github.com/honeycombio/gonx
+# github.com/honeycombio/honeytail v1.1.4
+github.com/honeycombio/honeytail/event
+github.com/honeycombio/honeytail/httime
+github.com/honeycombio/honeytail/httime/httimetest
+github.com/honeycombio/honeytail/parsers
+github.com/honeycombio/honeytail/parsers/arangodb
+github.com/honeycombio/honeytail/parsers/htjson
+github.com/honeycombio/honeytail/parsers/keyval
+github.com/honeycombio/honeytail/parsers/mongodb
+github.com/honeycombio/honeytail/parsers/nginx
+github.com/honeycombio/honeytail/parsers/postgresql
+github.com/honeycombio/honeytail/parsers/regex
+github.com/honeycombio/honeytail/tail
+# github.com/honeycombio/mongodbtools v0.0.0-20180629202505-358295c47f68
+github.com/honeycombio/mongodbtools/logparser
+github.com/honeycombio/mongodbtools/logparser/internal/logparser
+github.com/honeycombio/mongodbtools/queryshape
+github.com/honeycombio/mongodbtools/queryshape/internal/queryshape
+# github.com/honeycombio/mysqltools v0.0.1
+github.com/honeycombio/mysqltools/query/normalizer
+# github.com/honeycombio/sqlparser v0.0.0-20180730202938-aab361df519b
+github.com/honeycombio/sqlparser
+github.com/honeycombio/sqlparser/dependency/bson
+github.com/honeycombio/sqlparser/dependency/bytes2
+github.com/honeycombio/sqlparser/dependency/hack
+github.com/honeycombio/sqlparser/dependency/sqltypes
+# github.com/honeycombio/urlshaper v0.0.0-20170302202025-2baba9ae5b5f
+github.com/honeycombio/urlshaper
+# github.com/hpcloud/tail v1.0.1-0.20170814160653-37f427138745
+github.com/hpcloud/tail
+github.com/hpcloud/tail/ratelimiter
+github.com/hpcloud/tail/util
+github.com/hpcloud/tail/watch
+github.com/hpcloud/tail/winfile
+# github.com/jessevdk/go-flags v1.4.0
+github.com/jessevdk/go-flags
+# github.com/konsorten/go-windows-terminal-sequences v1.0.2
+github.com/konsorten/go-windows-terminal-sequences
+# github.com/kr/logfmt v0.0.0-20140226030751-b84e30acd515
+github.com/kr/logfmt
+# github.com/pmezard/go-difflib v1.0.0
+github.com/pmezard/go-difflib/difflib
+# github.com/sirupsen/logrus v1.4.2
+github.com/sirupsen/logrus
+# github.com/stretchr/testify v1.2.2
+github.com/stretchr/testify/assert
+# golang.org/x/sys v0.0.0-20200223170610-d5e6a3e2c0ae
+golang.org/x/sys/unix
+# gopkg.in/alexcesaro/statsd.v2 v2.0.0
+gopkg.in/alexcesaro/statsd.v2
+# gopkg.in/fsnotify.v1 v1.4.7
+gopkg.in/fsnotify.v1
+# gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7
+gopkg.in/tomb.v1

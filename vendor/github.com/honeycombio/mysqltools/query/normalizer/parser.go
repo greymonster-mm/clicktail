@@ -6,7 +6,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	"github.com/honeycombio/sqlparser"
 )
 
@@ -67,6 +67,20 @@ func (q *QuestionMarkExpr) Serialize(runes []rune) []rune {
 
 func (*QuestionMarkExpr) IExpr()    {}
 func (*QuestionMarkExpr) IValExpr() {}
+
+type EllipsisExpr struct{}
+
+func (e *EllipsisExpr) Format(buf *sqlparser.TrackedBuffer) {
+	buf.Myprintf("(...)")
+}
+
+func (e *EllipsisExpr) Serialize(runes []rune) []rune {
+	return append(runes, []rune("(...)")...)
+}
+
+func (*EllipsisExpr) IExpr()     {}
+func (*EllipsisExpr) IValExpr()  {}
+func (*EllipsisExpr) IRowTuple() {}
 
 func (n *Parser) TransformSelect(node *sqlparser.Select) sqlparser.SQLNode {
 	n.addComments(node.Comments)
@@ -236,7 +250,12 @@ func (n *Parser) TransformComparisonExpr(node *sqlparser.ComparisonExpr) sqlpars
 		return nil
 	}
 	node.Left, _ = transform(node.Left, n).(sqlparser.ValExpr)
-	node.Right, _ = transform(node.Right, n).(sqlparser.ValExpr)
+
+	if node.Operator == sqlparser.AST_IN && sqlparser.IsSimpleTuple(node.Right) {
+		node.Right = &EllipsisExpr{}
+	} else {
+		node.Right, _ = transform(node.Right, n).(sqlparser.ValExpr)
+	}
 	return node
 }
 func (n *Parser) TransformRangeCond(node *sqlparser.RangeCond) sqlparser.SQLNode {

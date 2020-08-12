@@ -5,7 +5,6 @@ go 1.13
 require (
 	github.com/Altinity/libclick-go v1.6.1-0.20180401204617-875fa06ddbc7
 	github.com/go-sql-driver/mysql v1.5.0
-	github.com/greymonster-mm/clicktail v0.0.0-20200727161352-300cd9d840c7
 	github.com/honeycombio/dynsampler-go v0.2.1
 	github.com/honeycombio/gonx v1.3.1-0.20171118020637-f9b2468e9ef8
 	github.com/honeycombio/honeytail v1.1.4
